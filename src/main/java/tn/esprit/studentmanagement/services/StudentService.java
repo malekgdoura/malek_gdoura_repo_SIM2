@@ -6,7 +6,7 @@ import tn.esprit.studentmanagement.repositories.StudentRepository;
 import java.util.List; 
 @Service 
     public class StudentService implements IStudentService { 
-        @Autowired 
+        
         private StudentRepository studentRepository; 
         public List<Student> getAllStudents() { 
             return studentRepository.findAll(); 
