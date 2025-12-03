@@ -6,7 +6,7 @@ import tn.esprit.studentmanagement.entities.Enrollment;
 import java.util.List; 
 @Service 
     public class EnrollmentService implements IEnrollment { 
-        @Autowired 
+    
         EnrollmentRepository enrollmentRepository; 
         @Override 
         public List<Enrollment> getAllEnrollments() { 
@@ -14,7 +14,7 @@ import java.util.List;
         } 
         @Override 
         public Enrollment getEnrollmentById(Long idEnrollment) { 
-            return enrollmentRepository.findById(idEnrollment).get(); 
+            return enrollmentRepository.findById(idEnrollment).orElse(null); 
         } 
         @Override 
         public Enrollment saveEnrollment(Enrollment enrollment) { 
