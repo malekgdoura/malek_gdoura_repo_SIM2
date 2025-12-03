@@ -27,7 +27,7 @@ class DepartmentServiceTest {
     @Test
     void testGetDepartmentById() {
         Department d = new Department();
-        d.setId(1L);
+        d.setIdDepartment(1L);
         d.setName("IT");
 
         when(repository.findById(1L)).thenReturn(Optional.of(d));
