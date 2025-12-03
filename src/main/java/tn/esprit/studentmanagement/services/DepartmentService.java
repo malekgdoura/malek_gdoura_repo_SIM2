@@ -1,34 +1,35 @@
 package tn.esprit.studentmanagement.services;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.studentmanagement.repositories.EnrollmentRepository;
-import tn.esprit.studentmanagement.entities.Enrollment;
+import tn.esprit.studentmanagement.entities.Department;
+import tn.esprit.studentmanagement.repositories.DepartmentRepository;
+
 import java.util.List;
 
 @Service
-public class EnrollmentService implements IEnrollment {
+
+public class DepartmentService implements IDepartmentService {
     @Autowired
-    EnrollmentRepository enrollmentRepository;
+    DepartmentRepository departmentRepository;
 
     @Override
-    public List<Enrollment> getAllEnrollments() {
-        return enrollmentRepository.findAll();
+    public List<Department> getAllDepartments() {
+        return departmentRepository.findAll();
     }
 
     @Override
-    public Enrollment getEnrollmentById(Long idEnrollment) {
-        return enrollmentRepository.findById(idEnrollment).get();
+    public Department getDepartmentById(Long idDepartment) {
+        return departmentRepository.findById(idDepartment).get();
     }
 
     @Override
-    public Enrollment saveEnrollment(Enrollment enrollment) {
-        return enrollmentRepository.save(enrollment);
+    public Department saveDepartment(Department department) {
+        return departmentRepository.save(department);
     }
 
     @Override
-    public void deleteEnrollment(Long idEnrollment) {
-enrollmentRepository.deleteById(idEnrollment);
+    public void deleteDepartment(Long idDepartment) {
+departmentRepository.deleteById(idDepartment);
     }
 }
