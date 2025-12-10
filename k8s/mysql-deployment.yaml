@@ -29,11 +29,10 @@ metadata:
   name: mysql
   namespace: devops
 spec:
-  selector:
+  replicas: 1
+  selector: 
     matchLabels:
       app: mysql
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -44,9 +43,9 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "rootpass"
+          value: root123
         - name: MYSQL_DATABASE
-          value: "testdb"
+          value: springdb
         ports:
         - containerPort: 3306
         volumeMounts:
@@ -63,8 +62,8 @@ metadata:
   name: mysql-service
   namespace: devops
 spec:
-  ports:
-    - port: 3306
   selector:
     app: mysql
+  ports:
+    - port: 3306
   type: ClusterIP
