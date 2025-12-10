@@ -4,9 +4,16 @@ metadata:
   name: spring-config
   namespace: devops
 data:
-  SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/testdb
-  SPRING_DATASOURCE_USERNAME: root
-  SPRING_DATASOURCE_PASSWORD: rootpass
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/springdb
+---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+  name: spring-secret
+  type: Opaque
+  data:
+  SPRING_DATASOURCE_USERNAME: c3ByaW5n # "spring" encode en base64
+  SPRING_DATASOURCE_PASSWORD: c3ByaW5nMTIz # "spring123" encode en base64
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -14,7 +21,7 @@ metadata:
   name: spring-app
   namespace: devops
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: spring-app
@@ -25,12 +32,14 @@ spec:
     spec:
       containers:
       - name: spring-app
-        image: yourdockerhubusername/spring-app:latest
+        image: gdouramalek/devopsatelier
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
             name: spring-config
+        -secretRef:
+        name: spring-secret
 ---
 apiVersion: v1
 kind: Service
@@ -41,7 +50,7 @@ spec:
   selector:
     app: spring-app
   ports:
-    - protocol: TCP
-      port: 8080
+    - port: 8080
       targetPort: 8080
+      nodeProt: 30080
   type: NodePort
