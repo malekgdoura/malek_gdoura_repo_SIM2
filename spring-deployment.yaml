@@ -33,7 +33,8 @@ spec:
     spec:
       containers:
         - name: spring-app
-          image: gdouramalek/devopsatelier
+          image: gdouramalek/devopsatelier:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
