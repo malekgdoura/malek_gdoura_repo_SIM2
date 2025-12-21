@@ -36,7 +36,7 @@ spec:
           image: gdouramalek/devopsatelier:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 8089
           envFrom:
             - configMapRef:
                 name: spring-config
